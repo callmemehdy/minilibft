@@ -6,7 +6,7 @@
 #    By: mel-akar <mel-akar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/09 06:34:46 by iazoubi           #+#    #+#              #
-#    Updated: 2024/11/01 16:16:38 by mel-akar         ###   ########.fr        #
+#    Updated: 2024/11/01 16:57:45 by mel-akar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
-# CFLAGS = -pthread -fsanitize=-fsanitize=thread
 
 SRCS = main.c parse.c philo_utils.c init.c moni.c
 
@@ -31,9 +30,10 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(NAME)
+	rm -f $(OBJS)
 	
 fclean: clean
+	rm -f $(NAME)
 	
 re: clean all
 

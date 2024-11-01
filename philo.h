@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mel-akar <mel-akar@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 06:34:28 by iazoubi           #+#    #+#             */
-/*   Updated: 2024/11/01 16:33:22 by mel-akar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
@@ -31,11 +20,11 @@ typedef struct s_fork
 typedef struct s_table
 {
 	_Atomic long	ph_nbr;
-	_Atomic long	time_die; // strncmp dont forget it 
+	_Atomic long	time_die; 
 	_Atomic long	time_eat;
 	_Atomic long	time_sleep;
 	_Atomic long	max_meals;
-	_Atomic long			start_sim;
+	_Atomic long	start_sim;
 	_Atomic bool	end_sim;
 	_Atomic bool	death_flag;
 	pthread_mutex_t	print_mutex;
@@ -46,7 +35,7 @@ typedef struct s_table
 typedef struct s_philo
 {
 	pthread_t			tid;
-	int					id;
+	_Atomic int			id;
 	_Atomic long		meals_counter;
 	_Atomic bool		full;
 	_Atomic int			full_count;	

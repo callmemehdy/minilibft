@@ -6,7 +6,7 @@
 /*   By: mel-akar <mel-akar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:25:41 by iazoubi           #+#    #+#             */
-/*   Updated: 2024/11/01 16:41:43 by mel-akar         ###   ########.fr       */
+/*   Updated: 2024/11/01 16:51:23 by mel-akar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,8 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	table = philo->table;
-	if (philo->id % 2)
-	{
-		print_status(philo, "is thinking");
+	if (!(philo->id % 2))
 		is_sleep(30, table);
-	}
 	while (1)
 	{
 		if (table->end_sim)
