@@ -16,8 +16,10 @@ void	cclean(t_table *table)
 	}
 }
 
+void f(){system("leaks philo");}
+
 int	main(int ac, char **av)
-{
+{atexit(f);
 	t_table	table;
 
 	table = (t_table){0};
