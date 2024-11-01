@@ -5,32 +5,36 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mel-akar <mel-akar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/08/17 17:16:16 by ael-amma          #+#    #+#              #
-#    Updated: 2024/09/20 09:58:37 by mel-akar         ###   ########.fr        #
+#    Created: 2024/09/09 06:34:46 by iazoubi           #+#    #+#              #
+#    Updated: 2024/11/01 16:16:38 by mel-akar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-OBJS	=	ft_bzero.o ft_calloc.o ft_memset.o ft_split.o ft_strchr.o		\
-			ft_strcmp.o ft_strdup.o ft_strlen.o ft_substr.o ft_strjoin_sep.o \
-			garbage_collector.o ft_open.o ft_lentill.o ft_max_min.o ft_is.o	  \
-			ft_close.o
 
-NAME	=	libft.a
+CC = cc
 
-all		:	$(NAME)
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
+# CFLAGS = -pthread -fsanitize=-fsanitize=thread
 
-$(NAME)	:	$(OBJS)
-	ar rcs $@ $(OBJS)
+SRCS = main.c parse.c philo_utils.c init.c moni.c
 
-%.o		:	%.c libft.h
-	cc -Wall -Wextra -Werror  -c $<
+OBJS = $(SRCS:.c=.o)
 
-clean	:
-	rm -rf $(OBJS)
+NAME = philo
 
-fclean	:	clean
-	rm -rf $(NAME)
+all: $(NAME)
 
-re		:	fclean all
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS)
 
-.PHONY	:	clean
+%.o: %.c philo.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJS) $(NAME)
+	
+fclean: clean
+	
+re: clean all
+
+.PHONY: all clean 
