@@ -44,3 +44,15 @@ void	simulation_end(t_table *table)
 {
 	table->end_sim = true;
 }
+
+bool	one_philo(t_table *table)
+{
+	if (table->ph_nbr == 1)
+	{
+		printf("0 %d %s\n", 1, "has taken a fork");
+		is_sleep(table->time_die, table);
+		printf("%ld 1 died\n", ++table->time_die);
+		return (false);
+	}
+	return (true);
+}

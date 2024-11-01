@@ -9,7 +9,9 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <sys/time.h>
-# include <string.h>
+
+# define PERR "Invalid input! \nUsage: ./philo \
+[PHILOS] [TTDIE] [TTEAT] [TTSLP] [MEALS]\n"
 
 typedef struct s_fork
 {
@@ -20,7 +22,7 @@ typedef struct s_fork
 typedef struct s_table
 {
 	_Atomic long	ph_nbr;
-	_Atomic long	time_die; 
+	_Atomic long	time_die;
 	_Atomic long	time_eat;
 	_Atomic long	time_sleep;
 	_Atomic long	max_meals;
@@ -63,5 +65,5 @@ int		death_checker(t_table *table, int ph_index);
 void	print_status(t_philo *philo, char *status);
 bool	ph_exitst(t_table *table, int i);
 void	simulation_end(t_table *table);
-
+bool	one_philo(t_table *table);
 #endif

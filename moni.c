@@ -6,7 +6,7 @@
 /*   By: mel-akar <mel-akar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:25:41 by iazoubi           #+#    #+#             */
-/*   Updated: 2024/11/01 16:51:23 by mel-akar         ###   ########.fr       */
+/*   Updated: 2024/11/01 17:22:56 by mel-akar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@ bool	dining_cycle(t_philo *philo, t_table *table)
 {
 	pthread_mutex_lock(&philo->l_fork->fork);
 	print_status(philo, "has taken a fork");
-	if (table->ph_nbr == 1)
-	{
-		is_sleep(table->time_die, table);
-		pthread_mutex_unlock(&philo->l_fork->fork);
-		return (NULL);
-	}
 	pthread_mutex_lock(&philo->r_fork->fork);
 	print_status(philo, "has taken a fork");
 	print_status(philo, "is eating");
@@ -52,7 +46,7 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	table = philo->table;
 	if (!(philo->id % 2))
-		is_sleep(30, table);
+		is_sleep(40, table);
 	while (1)
 	{
 		if (table->end_sim)
@@ -105,17 +99,17 @@ int	start_simulation(t_table *table)
 	pthread_t	monitor;
 	int			index;
 
-	i = 0;
-	table->end_sim = false;
+	'I' && (i = -1), (table->end_sim = false);
+	if (!one_philo(table))
+		return (0);
 	table->start_sim = get_timestamp();
-	while (i < table->ph_nbr)
+	while (++i < table->ph_nbr)
 	{
 		table->philos[i].table = table;
 		table->philos[i].last_meal = table->start_sim;
 		if (pthread_create(&table->philos[i].tid, NULL, \
 			routine, &table->philos[i]) != 0)
 			return (-1);
-		i++;
 	}
 	if (pthread_create(&monitor, NULL, monitor_routine, table) != 0)
 		return (-1);

@@ -25,9 +25,9 @@ long	ft_atoi(const char *str)
 	i = 0;
 	result = 0;
 	while (str[i] == 32 || (str[i] >= '\t' && str[i] <= '\r'))
-		i++; // error
+		return (g_error("error : not a valid option"), -2);
 	if (str[i] == '+')
-		i++;
+		return (g_error("error : not a valid option"), -2);
 	if (!(str[i] >= '0' && str[i] <= '9'))
 		return (g_error("error : not a valid option"), -2);
 	while (str[i] >= '0' && str[i] <= '9')
@@ -45,7 +45,7 @@ long	ft_atoi(const char *str)
 int	parsing(t_table *table, char **argv)
 {
 	table->ph_nbr = ft_atoi(argv[1]);
-	if (!table->ph_nbr || table->ph_nbr == -2)
+	if (!table->ph_nbr || table->ph_nbr == -2 || table->ph_nbr > 200)
 		return (-1);
 	table->time_die = ft_atoi(argv[2]);
 	table->time_eat = ft_atoi(argv[3]);
@@ -56,8 +56,8 @@ int	parsing(t_table *table, char **argv)
 		table->max_meals = -1;
 	if (!table->max_meals)
 		return (-1);
-	if (table->time_die == -2 || table->time_eat == -2 || \
-		table->time_sleep == -2 || table->max_meals == -2)
+	if (table->time_die < 60 || table->time_eat < 60 || \
+		table->time_sleep < 60 || table->max_meals == -2)
 		return (-1);
 	return (0);
 }

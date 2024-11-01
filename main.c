@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	if (ac == 5 || ac == 6)
 	{
 		if (parsing(&table, av))
-			return (cclean(&table), 1);
+			return (cclean(&table), ft_putstr_fd(PERR, 2), 1);
 		if (init_table(&table))
 			return (cclean(&table), 1);
 		if (init_forks(&table))
